@@ -11,6 +11,7 @@ package org.xyzeelab.omicronlib;
  */
 public class MainEntryPoint {
     public static void main(String args[]) {
+        // Entry point for the system do all the initialization here. 
         
     }
 }
