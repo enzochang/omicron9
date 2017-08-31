@@ -18,8 +18,9 @@ import com.pi4j.io.gpio.RaspiPin;
 public class MainEntryPoint {
     static boolean loop = true;
     static GpioController gpio;
+    static GpioPinDigitalOutput pin;
     
-    public static void main(String args[]) {
+    public static void main(String args[]) throws InterruptedException {
         // Entry point for the system do all the initialization here. 
         
         // Call the setup to routine. 
@@ -34,10 +35,12 @@ public class MainEntryPoint {
     
     public static void Setup() {
         gpio = GpioFactory.getInstance();
+        pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "MyLED", PinState.HIGH);
     }
     
-    public static void Loop() {
-        final GpioPinDigitalOutput pin = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, "MyLED", PinState.HIGH);
-        pin.blink(200);
+    public static void Loop() throws InterruptedException {
+        pin.toggle();
+        Thread.sleep(200);
+
     }
 }
